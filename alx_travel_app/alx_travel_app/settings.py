@@ -83,9 +83,9 @@ import environ
 env = environ.Env()
 environ.Env.read_env()
 
-SECRET_KEY = env('SECRET_KEY')
-DEBUG = env.bool('DEBUG', default=False)
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+CHAPA_PUBLIC_KEY = env("CHAPA_PUBLIC_KEY")
+CHAPA_SECRET_KEY = env("CHAPA_SECRET_KEY")
+CHAPA_BASE_URL = "https://api.chapa.co/v1"
 
 DATABASES = {
     'default': {
@@ -97,6 +97,7 @@ DATABASES = {
         'PORT': env('DATABASE_PORT'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -139,6 +140,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CELERY_BROKER_URL = 'amqp://localhost'  # Using RabbitMQ
+# Celery settings
+CELERY_BROKER_URL = 'amqp://localhost'  # RabbitMQ as broker
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your_email@gmail.com'  # Replace with your email
+EMAIL_HOST_PASSWORD = 'your_email_password'  # Use App Password if using Gmail
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
