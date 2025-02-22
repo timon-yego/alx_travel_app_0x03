@@ -145,3 +145,8 @@ python manage.py runserver
 
 #### Test the Email Task
 Create a booking via Postman or Django Admin, and verify that the email is sent asynchronously.
+
+
+# Milestone 6: Deployment and Documentation
+link: Timoyegon.pythonanywhere.com
+      https://timoyegon.pythonanywhere.com/
